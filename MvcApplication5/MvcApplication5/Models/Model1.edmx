@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MVCTestModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MVCTestModelStoreContainer">
+          <EntitySet Name="CommentFiles" EntityType="MVCTestModel.Store.CommentFiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Comments" EntityType="MVCTestModel.Store.Comments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FileComments" EntityType="MVCTestModel.Store.FileComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Files" EntityType="MVCTestModel.Store.Files" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProjectComments" EntityType="MVCTestModel.Store.ProjectComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProjectFiles" EntityType="MVCTestModel.Store.ProjectFiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Projects" EntityType="MVCTestModel.Store.Projects" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__CommentFi__Comme__1F98B2C1" Association="MVCTestModel.Store.FK__CommentFi__Comme__1F98B2C1">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="CommentFiles" EntitySet="CommentFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommentFi__FileI__208CD6FA" Association="MVCTestModel.Store.FK__CommentFi__FileI__208CD6FA">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="CommentFiles" EntitySet="CommentFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FileComme__Comme__151B244E" Association="MVCTestModel.Store.FK__FileComme__Comme__151B244E">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="FileComments" EntitySet="FileComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FileComme__FileI__14270015" Association="MVCTestModel.Store.FK__FileComme__FileI__14270015">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="FileComments" EntitySet="FileComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectCo__Comme__0F624AF8" Association="MVCTestModel.Store.FK__ProjectCo__Comme__0F624AF8">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="ProjectComments" EntitySet="ProjectComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectCo__Proje__0E6E26BF" Association="MVCTestModel.Store.FK__ProjectCo__Proje__0E6E26BF">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectComments" EntitySet="ProjectComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectFi__FileI__1AD3FDA4" Association="MVCTestModel.Store.FK__ProjectFi__FileI__1AD3FDA4">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="ProjectFiles" EntitySet="ProjectFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectFi__Proje__19DFD96B" Association="MVCTestModel.Store.FK__ProjectFi__Proje__19DFD96B">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectFiles" EntitySet="ProjectFiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CommentFiles">
+          <Key>
+            <PropertyRef Name="CommentId" />
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="CommentId" Type="int" Nullable="false" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileComments">
+          <Key>
+            <PropertyRef Name="FileId" />
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="CommentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MimeType" Type="nvarchar" MaxLength="20" />
+          <Property Name="ItemValue" Type="varbinary(max)" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectComments">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="CommentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectFiles">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="AssignedTo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__CommentFi__Comme__1F98B2C1">
+          <End Role="Comments" Type="MVCTestModel.Store.Comments" Multiplicity="1" />
+          <End Role="CommentFiles" Type="MVCTestModel.Store.CommentFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="CommentId" />
+            </Principal>
+            <Dependent Role="CommentFiles">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommentFi__FileI__208CD6FA">
+          <End Role="Files" Type="MVCTestModel.Store.Files" Multiplicity="1" />
+          <End Role="CommentFiles" Type="MVCTestModel.Store.CommentFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="CommentFiles">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FileComme__Comme__151B244E">
+          <End Role="Comments" Type="MVCTestModel.Store.Comments" Multiplicity="1" />
+          <End Role="FileComments" Type="MVCTestModel.Store.FileComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="CommentId" />
+            </Principal>
+            <Dependent Role="FileComments">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FileComme__FileI__14270015">
+          <End Role="Files" Type="MVCTestModel.Store.Files" Multiplicity="1" />
+          <End Role="FileComments" Type="MVCTestModel.Store.FileComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="FileComments">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectCo__Comme__0F624AF8">
+          <End Role="Comments" Type="MVCTestModel.Store.Comments" Multiplicity="1" />
+          <End Role="ProjectComments" Type="MVCTestModel.Store.ProjectComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="CommentId" />
+            </Principal>
+            <Dependent Role="ProjectComments">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectCo__Proje__0E6E26BF">
+          <End Role="Projects" Type="MVCTestModel.Store.Projects" Multiplicity="1" />
+          <End Role="ProjectComments" Type="MVCTestModel.Store.ProjectComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectComments">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectFi__FileI__1AD3FDA4">
+          <End Role="Files" Type="MVCTestModel.Store.Files" Multiplicity="1" />
+          <End Role="ProjectFiles" Type="MVCTestModel.Store.ProjectFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="ProjectFiles">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectFi__Proje__19DFD96B">
+          <End Role="Projects" Type="MVCTestModel.Store.Projects" Multiplicity="1" />
+          <End Role="ProjectFiles" Type="MVCTestModel.Store.ProjectFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectFiles">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MVCTestModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MVCTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="MVCTestModel.Comment" />
+          <EntitySet Name="Files" EntityType="MVCTestModel.File" />
+          <AssociationSet Name="CommentFiles" Association="MVCTestModel.CommentFiles">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FileComments" Association="MVCTestModel.FileComments">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <EntitySet Name="Projects" EntityType="MVCTestModel.Project" />
+          <AssociationSet Name="ProjectComments" Association="MVCTestModel.ProjectComments">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectFiles" Association="MVCTestModel.ProjectFiles">
+            <End Role="File" EntitySet="Files" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Files" Relationship="MVCTestModel.CommentFiles" FromRole="Comments" ToRole="Files" />
+          <NavigationProperty Name="Files1" Relationship="MVCTestModel.FileComments" FromRole="Comments" ToRole="Files" />
+          <NavigationProperty Name="Projects" Relationship="MVCTestModel.ProjectComments" FromRole="Comment" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MimeType" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="ItemValue" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="MVCTestModel.CommentFiles" FromRole="Files" ToRole="Comments" />
+          <NavigationProperty Name="Comments1" Relationship="MVCTestModel.FileComments" FromRole="Files" ToRole="Comments" />
+          <NavigationProperty Name="Projects" Relationship="MVCTestModel.ProjectFiles" FromRole="File" ToRole="Project" />
+        </EntityType>
+        <Association Name="CommentFiles">
+          <End Role="Comments" Type="MVCTestModel.Comment" Multiplicity="*" />
+          <End Role="Files" Type="MVCTestModel.File" Multiplicity="*" />
+        </Association>
+        <Association Name="FileComments">
+          <End Role="Comments" Type="MVCTestModel.Comment" Multiplicity="*" />
+          <End Role="Files" Type="MVCTestModel.File" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Type="Int32" Name="ProjectId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="DateTime" Name="EndDate" />
+          <Property Type="String" Name="Description" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AssignedTo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="String" Name="CreatedByName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comments" Relationship="MVCTestModel.ProjectComments" FromRole="Project" ToRole="Comment" />
+          <NavigationProperty Name="Files" Relationship="MVCTestModel.ProjectFiles" FromRole="Project" ToRole="File" />
+        </EntityType>
+        <Association Name="ProjectComments">
+          <End Type="MVCTestModel.Comment" Role="Comment" Multiplicity="*" />
+          <End Type="MVCTestModel.Project" Role="Project" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectFiles">
+          <End Type="MVCTestModel.File" Role="File" Multiplicity="*" />
+          <End Type="MVCTestModel.Project" Role="Project" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MVCTestModelStoreContainer" CdmEntityContainer="MVCTestEntities">
+          <EntitySetMapping Name="Comments"><EntityTypeMapping TypeName="MVCTestModel.Comment"><MappingFragment StoreEntitySet="Comments">
+            <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+            <ScalarProperty Name="Value" ColumnName="Value" />
+            <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+            <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Files"><EntityTypeMapping TypeName="MVCTestModel.File"><MappingFragment StoreEntitySet="Files">
+            <ScalarProperty Name="FileId" ColumnName="FileId" />
+            <ScalarProperty Name="FileName" ColumnName="FileName" />
+            <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+            <ScalarProperty Name="ItemValue" ColumnName="ItemValue" />
+            <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+            <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="CommentFiles" TypeName="MVCTestModel.CommentFiles" StoreEntitySet="CommentFiles">
+            <EndProperty Name="Comments">
+              <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+            </EndProperty>
+            <EndProperty Name="Files">
+              <ScalarProperty Name="FileId" ColumnName="FileId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FileComments" TypeName="MVCTestModel.FileComments" StoreEntitySet="FileComments">
+            <EndProperty Name="Comments">
+              <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+            </EndProperty>
+            <EndProperty Name="Files">
+              <ScalarProperty Name="FileId" ColumnName="FileId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="MVCTestModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProjectComments" TypeName="MVCTestModel.ProjectComments" StoreEntitySet="ProjectComments">
+            <EndProperty Name="Project">
+              <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+            </EndProperty>
+            <EndProperty Name="Comment">
+              <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProjectFiles" TypeName="MVCTestModel.ProjectFiles" StoreEntitySet="ProjectFiles">
+            <EndProperty Name="Project">
+              <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+            </EndProperty>
+            <EndProperty Name="File">
+              <ScalarProperty Name="FileId" ColumnName="FileId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="MVCTestModel.Comment" Width="1.5" PointX="0.75" PointY="1.25" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCTestModel.File" Width="1.5" PointX="3" PointY="1.125" Height="2.7494921874999996" IsExpanded="true" />
+        <AssociationConnector Association="MVCTestModel.CommentFiles" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.8169834391276045" />
+          <ConnectorPoint PointX="3" PointY="2.8169834391276045" />
+        </AssociationConnector>
+        <AssociationConnector Association="MVCTestModel.FileComments" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.9709917195638023" />
+          <ConnectorPoint PointX="3" PointY="1.9709917195638023" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="MVCTestModel.Project" Width="1.5" PointX="5.25" PointY="1" Height="2.9417936197916656" />
+        <AssociationConnector Association="MVCTestModel.ProjectComments" >
+          <ConnectorPoint PointX="2.2499999999999996" PointY="3.614889322916667" />
+          <ConnectorPoint PointX="2.625" PointY="3.9898893229166674" />
+          <ConnectorPoint PointX="2.625" PointY="4.3167936197916656" />
+          <ConnectorPoint PointX="4.875" PointY="4.3167936197916656" />
+          <ConnectorPoint PointX="5.25" PointY="3.9417936197916656" />
+        </AssociationConnector>
+        <AssociationConnector Association="MVCTestModel.ProjectFiles" >
+          <ConnectorPoint PointX="4.5" PointY="2.49974609375" />
+          <ConnectorPoint PointX="5.25" PointY="2.49974609375" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
